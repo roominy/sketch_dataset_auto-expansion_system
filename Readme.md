@@ -25,27 +25,37 @@ This project provides a web interface and backend API for managing user sketches
 
 
 2. Set up the back-end:
-- cd flaskBackend
-- python -m venv venv
-- source venv/bin/activate
-- pip install -r requirements.txt
-
+```
+cd flaskBackend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 3. run flask back-end:
-- python app.py
+```
+python app.py
+```
 
-4. Create database Schema, Tables, and Stored Procedures using sql files in /flaskBackend/database_files.
+4. Create database Schema, Tables, and Stored Procedures using SQL files in /flaskBackend/database_files.
 
 5. Set up the front-end:
-- cd sketch-app
-- npm install
+```
+cd sketch-app
+npm install
+```
 
 6. run angular front-end:
-- npm start
-
+```
+npm start
+```
 ## Backend APIs: 
 - api/auth/authorization: has the login and register email verification endpoints
 - api/admin/users: has the admin user management endpoints
 - api/data_admin/dataset: has the data admin categories, baselines, and pipelines management endpoints
 - api/user/profile: has the user profile management endpoints
+
+## CNN-based Encoder
+Download the final Resnet18 model from [here](https://drive.google.com/file/d/18WN_fr2ilfjFrSWh8XTOyCSetOW55xFL/view?usp=sharing).
+
 
 
