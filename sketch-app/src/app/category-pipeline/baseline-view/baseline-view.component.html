@@ -1,0 +1,104 @@
+
+<div class="card  margin-10-auto max-width-80">
+    <h2 class="card-header">{{category?.category_label}}: View Baseline Group Sketches</h2>
+    <div class="card-body">
+        <!-- <p>baseline-group works!</p> -->
+        <form *ngIf="!loading" [formGroup]="seletGroupForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Baseline Group</label>
+                    <select id="baselines_group" formControlName="baselines_group" class="form-control">
+                        <option *ngFor="let group of baselineGroups" [value]="group.baseline_group_id">
+                            {{group.group_name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-3 col">
+                    
+                    <button [disabled]="submitting" class="btn btn-primary" style="margin-top: 1.7em">
+                        <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                        Fetch Baselines
+                    </button>
+                </div>
+            </div>
+            <!-- <div class="mb-3">
+                <button [disabled]="submitting" class="btn btn-primary">
+                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                    Fetch Baselines
+                </button>
+            </div> -->
+        </form>
+        <div *ngIf="loading" class="text-center m-5">
+            <span class="spinner-border spinner-border-lg align-center"></span>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Group Baselines:</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mb-3">
+                <div class="baseline-table">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%;background: white; position: sticky;top: 0;">ID</th>
+                                <th style="width: 70%;background: white; position: sticky;top: 0;">Group Name</th>
+                                <!-- <th style="width: 50%">Description</th> -->
+                                <th style="width: 20%;background: white; position: sticky;top: 0;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="baselineGroupSketches?.baseline_sketches && baselineGroupSketches?.baseline_sketches?.length == 0">
+                                <td colspan="4" class="text-center">No Baseline Sketches</td>
+                            </tr>
+                            <tr *ngFor="let sketch of baselineGroupSketches?.baseline_sketches">
+                                <td>{{sketch.baseline_id}}</td>
+                                <td>{{sketch.baseline_name}}</td>
+                                <!-- <td>{{group.description}}</td> -->
+                                <td style="white-space: nowrap">
+                                    <!-- <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary me-1">Edit</a> -->
+                                    <button (click)="previewBaseline(sketch)" class="btn btn-sm btn-secondary btn-baseline-sketch">
+                                        <!-- <span *ngIf="group.isDeleting" class="spinner-border spinner-border-sm"></span> -->
+                                        <span><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                        
+                                    </button>
+                                    <a  [href]="sketch?.baseline_sketch" [attr.download]="sketch?.baseline_name" style="color: white;">
+                                    <button class="btn btn-sm btn-primary btn-baseline-sketch" >
+                                        <!-- <span *ngIf="group.isDeleting" class="spinner-border spinner-border-sm"></span> -->
+                                        <!-- <a download="sketch.baseline_name" href="sketch.baseline_sketch" style="color: white;"><span><i class="fa fa-download"></i></span></a> -->
+                                        <span><i class="fa fa-download"></i></span>
+                                        
+                                    </button>
+                                    </a>
+
+                                    <!-- <button (click)="deleteGroup(sketch)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="group.isDeleting"> -->
+                                    <button (click)="deleteGroup(sketch)" class="btn btn-sm btn-danger btn-baseline-sketch" [disabled]="deleting">
+                                        <!-- <span *ngIf="group.isDeleting" class="spinner-border spinner-border-sm"></span> -->
+                                        <span ><i class="fa fa-trash"></i></span>
+                                        
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr *ngIf="!baselineGroups">
+                                <td colspan="4" class="text-center">
+                                    <span class="spinner-border spinner-border-lg align-center"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mb-3 col">
+
+                <div *ngIf="preview" class="container" style="text-align: center;">
+                    <h2>Selected Baseline Sketch</h2>
+                    <p><span>{{selectedBaselineSketch?.baseline_name}}</span></p>
+                    <img class="baseline-group-image img-thumbnail" style="margin: auto;display: block;width: 260px;height: 260px;" [src]="selectedBaselineSketch?.baseline_sketch" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+

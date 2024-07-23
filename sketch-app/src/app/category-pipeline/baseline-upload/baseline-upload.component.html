@@ -1,0 +1,79 @@
+<div class="card  margin-10-auto max-width-80">
+    <h2 class="card-header">{{category?.category_label}}: Upload Baseline Sketches</h2>
+    <div class="card-body">
+        <!-- <div class="drop-box-container">
+            <div class="row">
+              <div class="drop-box" appDnd (dropFiles)="onDropFiles($any($event))">
+                <span class="message">Drop File Images Here</span>
+              </div>
+            </div>
+            <div class="row">
+              <img *ngFor="let file of files" [src]="file.url" />
+            </div>
+        </div> -->
+        <form *ngIf="!loading" [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Baselines Group</label>
+                    <select id="baselinesGroup" formControlName="baselines_group" class="form-control">
+                        <option *ngFor="let group of baselineGroups" [value]="group.baseline_group_id">
+                            {{group.group_name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-3 col"></div>
+            </div>
+            <div class="row">
+                <div class="drag-drop-area" [class.uploading]="uploading" (drop)="onDrop($event)" (dragover)="onDragOver($event)">
+                    <h3>Drag and drop file here</h3>
+	                <h3>or</h3>
+                    <input type="file" #fileDropRef id="fileDropRef" name="fileDropRef" multiple (change)="onImageSelected($event)"> 
+                    <label for="fileDropRef">Browse for files</label>
+                 </div>
+             
+            </div>
+            <div class="row">
+                <label class="form-label">Selected Files</label>
+                <div class="selected-files-area" >
+                    <div *ngIf="baselineGroupSketches.length == 0" class="no-files-selected">
+                        No files selected
+                    </div>
+                    
+                    <div class="file-item" *ngFor="let f of baselineGroupSketches; let ind = index">
+                        <div class="file-item-remove" (click)="removeImage(ind);"> 
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#eeeff1" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>
+                        </div>
+                        <div class="col-sm-12 file-item-icon-div">
+                            <img class="file-item-image" [src]="f.baseline_sketch" alt="f.baseline_name" />
+                        </div>
+                        <div class="col-sm-12 file-item-text">
+                            <span>{{f.baseline_name}}</span>
+                        </div>
+                    </div>
+                    <!-- <div *ngFor="let file of files; index as i" class="selected-file">
+                        <img [src]="urls[i]" alt="file.name" />
+                        <span>{{file.name}}</span>
+                        <span>{{file.size}} bytes</span>
+                        
+                        
+                         <button type="button" class="btn btn-danger" (click)="removeFile(file)">Remove</button> 
+                     </div> --> 
+                </div>
+
+
+            </div>
+            <div class="mb-3">
+                <button [disabled]="submitting" class="btn btn-primary">
+                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                    Upload Baselines
+                </button>
+                <button type="button"  class="btn btn-secondary margin-5" (click)="resetForm()">
+                    Reset Form
+                </button>
+            </div>
+        </form>
+        <div *ngIf="loading" class="text-center m-5">
+            <span class="spinner-border spinner-border-lg align-center"></span>
+        </div>
+    </div>
+</div>

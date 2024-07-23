@@ -1,0 +1,52 @@
+﻿
+<div class="card  margin-10-auto max-width-80">
+    <h2 class="card-header">Users</h2>
+    <div class="card-body">
+
+        <!-- <a routerLink="add" class="btn btn-sm btn-primary mb-2">Add User</a>  -->
+        <!-- <span class="text-center"><i class="material-icons text-center" [ngStyle]="{'color': 'green'}">circle</i> Active </span>
+        <span class="text-center"><i class="material-icons text-center" [ngStyle]="{'color': 'red'}">circle</i> Inactive </span>
+        <span class="text-center"><i class="material-icons text-center" [ngStyle]="{'color': 'gold'}">circle</i> Pending Verification </span> -->
+        <ul class="legend">
+            <li><span class="text-center"><i class="material-icons text-center" [ngStyle]="{'color': 'green'}">circle</i> </span> Active  </li>
+            <li><span class="text-center"><i class="material-icons text-center" [ngStyle]="{'color': 'red'}">circle</i> </span> Inactive</li>
+            <li><span class="text-center"><i class="material-icons text-center" [ngStyle]="{'color': 'gold'}">circle</i> </span> Pending Verification </li>
+        </ul>  
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 10%;background: white; position: sticky;top: 0;">Status</th>
+                    <th style="width: 20%;background: white; position: sticky;top: 0;">Name</th>
+                    <th style="width: 20%;background: white; position: sticky;top: 0;">Username</th>
+                    <th style="width: 20%;background: white; position: sticky;top: 0;">Role</th>
+                    <th style="width: 20%;background: white; position: sticky;top: 0;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <td><i class="material-icons text-center" [ngStyle]=" {'color': (user?.status == 'active')? 'green' :  (user?.status == 'inactive')? 'red' : 'gold' }">circle</i></td>
+                    <td>{{user.first_name}} {{user.last_name}}</td>
+                    <td>{{user.username}}</td>
+                    <td>{{user.role}}</td>
+                    <td style="white-space: nowrap">
+                        <!-- <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary me-1">Edit</a> -->
+                        <a  routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary me-1" style="width: 25%;">Edit</a> 
+                        <!-- <button (click)="deleteUser(user.id)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="user.isDeleting"> -->
+                        <button  (click)="changeUserStatus(user)"  class="btn btn-sm" [ngClass]="user.status == 'inactive' ? 'btn-success' : user.status == 'active'?  'btn-danger' : 'btn-warning'  " style="width: 75%;" [disabled]="user.status == 'pending' || submittingChangeUserStatus " >
+                            <!-- <span *ngIf="user.isDeleting" class="spinner-border spinner-border-sm"></span>
+                            <span  *ngIf="user.isDeleting" >Delete</span> -->
+                            <span *ngIf="user.status == 'inactive'">Activate</span>
+                            <span *ngIf="user.status == 'active'">Deactivate</span>
+                            <span *ngIf="user.status == 'pending'">Pending Verification</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="!users">
+                    <td colspan="4" class="text-center">
+                        <span class="spinner-border spinner-border-lg align-center"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

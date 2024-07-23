@@ -1,0 +1,6 @@
+/.vscode
+/.vscode/*
+/test.py
+/models/final_resnet_model.pth
+/logs/*
+/.venv/*

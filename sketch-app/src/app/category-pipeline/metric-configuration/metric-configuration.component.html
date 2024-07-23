@@ -1,0 +1,117 @@
+
+<div class="card  margin-10-auto max-width-80">
+    <h2 class="card-header">{{category?.category_label}}: Pipeline Configurations</h2>
+    <div class="card-body">
+        <!-- <p>baseline-group works!</p> -->
+        <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Configuration Name</label>
+                    <input type="text" [ngModel]="configurationName" formControlName="configuration_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.configuration_name.errors }"  readonly/>
+                    <div *ngIf="submitted && f.configuration_name.errors" class="invalid-feedback">
+                        <div *ngIf="f.configuration_name.errors.required">Configuration Name is required</div>
+                    </div>
+                </div>
+                <div class="mb-3 col">
+                    <div class="mb-3 col">
+                        <label class="form-label">Baseline Group</label>
+                        <select id="baselinesGroup" formControlName="baseline_group" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.baseline_group.errors }" (change)="onBaselineGroupChange($event)">
+                            <option *ngFor="let group of baselineGroups" [value]="group?.baseline_group_id">
+                                {{group.group_name}}
+                            </option>
+                        </select>
+                        <div *ngIf="submitted && f.baseline_group.errors" class="invalid-feedback">
+                            <div *ngIf="f.baseline_group.errors.required">Baseline Group is required</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+                
+                <div class="mb-3 col"></div>
+            </div> -->
+
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Thresold</label>
+                    <select id="threshold" formControlName="threshold" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.threshold.errors }" (change)="onThresholdChange($event)">
+                        <option *ngFor="let threshold of thresholds" [value]="threshold">
+                            {{threshold}}
+                        </option>
+                    </select>
+                    <div *ngIf="submitted && f.threshold.errors" class="invalid-feedback">
+                        <div *ngIf="f.threshold.errors.required">Threshold is required</div>
+                    </div>
+                </div>
+                <div class="mb-3 col"></div>
+            </div>
+            <div class="mb-3">
+                <button [disabled]="submitting" class="btn btn-primary">
+                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                    Add Configuration
+                </button>
+                <button  type='button' class="btn btn-secondary margin-5" (click)="resetForm()">Reset Form</button>
+            </div>
+        </form>
+        <div *ngIf="loading" class="text-center m-5">
+            <span class="spinner-border spinner-border-lg align-center"></span>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Pipline Configurations</h2>
+            </div>
+            <div class="col"> <ul class="legend">
+                <li><span class="text-center"><i class="material-icons text-center" [ngStyle]="{'color': 'green'}">circle</i> </span> Active  </li>
+                <li><span class="text-center"><i class="material-icons text-center" [ngStyle]="{'color': 'red'}">circle</i> </span> Inactive</li>
+            </ul></div>
+            
+            
+            <div class="baseline-group-table">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;background: white; position: sticky;top: 0;">Status</th>
+                            <th style="width: 30%;background: white; position: sticky;top: 0;">Configuration Name</th>
+                            <th style="width: 30%;background: white; position: sticky;top: 0;">Baselines</th>
+                            <th style="width: 10%;background: white; position: sticky;top: 0;">Theshold</th>
+                            <th style="width: 20%;background: white; position: sticky;top: 0;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="pipelineConfigurations && pipelineConfigurations.length == 0">
+                            <td colspan="5" class="text-center">No Pipeline Configurations</td>
+                        </tr>
+                        <tr *ngFor="let configuration of pipelineConfigurations">
+                            <td><i class="material-icons text-center" [ngStyle]="{'color': (configuration?.status == 'active')? 'green' : 'red' }">circle</i></td>
+                            <td>{{configuration.configuration_name}}</td>
+                            <td>{{configuration.baseline_group_name}}</td>
+                            <td>{{configuration.threshold}}</td>
+                            <td style="white-space: nowrap">
+                                <!-- <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary me-1">Edit</a> -->
+                                
+                                <!-- <button (click)="changingConfigurationStatus(configuration)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="changingStatus">
+                                    <span >Activate</span>
+                                    
+                                </button> -->
+
+                                <button  (click)="changingConfigurationStatus(configuration)"  class="btn btn-sm" [ngClass]="configuration.status == 'inactive' ? 'btn-success' : 'btn-danger'  " style="width: 75%;" [disabled]="activate" >
+                                    <span *ngIf="configuration.status == 'inactive'">Activate</span>
+                                    <span *ngIf="configuration.status == 'active'">Deactivate</span>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!pipelineConfigurations">
+                            <td colspan="5" class="text-center">
+                                <span class="spinner-border spinner-border-lg align-center"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+

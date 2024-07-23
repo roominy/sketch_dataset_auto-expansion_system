@@ -1,0 +1,10 @@
+﻿<div classs="container p-5">
+	<div class="row no-gutters ">
+		<div class="col-lg-5 col-md-12 m-auto">
+            <div *ngFor="let alert of alerts" class="{{cssClass(alert)}}">
+                <span [innerHTML]="alert.message"></span>
+                <button class="btn-close" (click)="removeAlert(alert)"></button>
+            </div>
+        </div>
+    </div>
+</div>

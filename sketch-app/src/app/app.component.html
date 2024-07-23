@@ -1,0 +1,113 @@
+﻿<!-- nav -->
+<!-- <nav class="navbar navbar-expand navbar-dark bg-dark px-3  min-vh-8" *ngIf="user">
+    <div class="navbar-nav">
+        
+        <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+        <button class="btn btn-link nav-item nav-link" (click)="logout()">Logout</button>
+    </div>
+</nav> -->
+<!-- <alert></alert>
+<router-outlet></router-outlet> -->
+  <!-- main app container -->
+  
+<!-- <div class="app-container" *ngIf="!user?.token">
+    <alert></alert>
+    <router-outlet></router-outlet>
+</div> -->
+
+
+<div class="app-container">
+    <mat-toolbar color="primary" *ngIf="user?.token">
+        <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span>Sketch Dataset Auto-Expansion</span>
+        <span class="example-fill-remaining-space"></span>
+       
+        <button mat-icon-button aria-label="Home icon" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <mat-icon>home</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Accoount icon" routerLink="/users" routerLinkActive="active"  *ngIf="user?.role == 'admin'">
+            <mat-icon>assignment_ind</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Accoount icon" routerLink="/profile" routerLinkActive="active">
+            <mat-icon>account_box</mat-icon>
+        </button>
+        <!-- <button mat-button>
+            <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        </button> -->
+        <!-- <button mat-button>
+            <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+        </button> -->
+    
+        <button mat-icon-button aria-label="logout icon" (click)="logout()" >
+            <mat-icon>logout</mat-icon>
+        </button>
+        <!-- <button mat-button (click)="logout()" >
+            Logout
+        </button> -->
+      </mat-toolbar>
+    
+    
+     
+      <mat-sidenav-container autosize>
+        <mat-sidenav [ngClass]="!isCollapsed ? 'expanded' : 'collapsed'" [mode]="isMobile ? 'over' : 'side'" [opened]="isMobile ? 'false' : 'true'">
+            <div class="nav-list-title" style="position: sticky;top: 0;background: #dddbd8; z-index: 1;">
+                <span class="title">Categories</span>
+                <span class="example-fill-remaining-space"></span>
+
+                <button mat-icon-button aria-label="Add category" (click)="refreshCategories()" >
+                    <mat-icon>refresh</mat-icon>
+                </button>
+                
+                <button mat-icon-button aria-label="Add category" (click)="addCategory()"  *ngIf="user?.role == 'admin' || user?.role == 'data_admin'">
+                    <mat-icon>add_box</mat-icon>
+                </button>
+            </div> 
+            <mat-nav-list *ngIf="user?.role == 'admin' || user?.role == 'data_admin'">
+                <a mat-list-item *ngFor="let category of categories" class="mat-list-base" >
+                  <span class="entry">
+                    <span  class="example-fill-remaining-space entry" (click)="adminSelectCategory(category)" >
+                        <mat-icon [ngStyle]="{'color': category.status == 'inactive'?'red':'green'}">brush</mat-icon>
+                        <span>{{category.category_label}}</span>
+                        <!-- <span class="example-fill-remaining-space"></span> -->
+                    </span>
+                    
+                    <button mat-icon-button aria-label="Edit Catagory" (click)="editCategory(category)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                  </span>
+                </a>
+            </mat-nav-list>
+            <mat-nav-list *ngIf="user?.role == 'user'">
+                <a mat-list-item *ngFor="let category of categories" class="mat-list-base" [class.disabled-category]="category.status == 'inactive'" >
+                <span class="entry">
+                    <span  class="example-fill-remaining-space entry" (click)="selectCategory(category)"  >
+                        <mat-icon>brush</mat-icon>
+                        <span>{{category.category_label}}</span>
+                        <!-- <span class="example-fill-remaining-space"></span> -->
+                    </span>
+                </span>
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
+        <mat-sidenav-content>
+            <alert></alert>
+          <router-outlet></router-outlet>
+        </mat-sidenav-content>
+      </mat-sidenav-container>
+    
+    </div>
+
+
+
+
+<!-- credits -->
+<!-- <div class="text-center mt-4">
+    <p>
+        <a href="https://jasonwatmore.com/post/2022/11/29/angular-14-user-registration-and-login-example-tutorial" target="_top">Angular 14 - User Registration and Login Example & Tutorial</a>
+    </p>
+    <p>
+        <a href="https://jasonwatmore.com" target="_top">JasonWatmore.com</a>
+    </p>
+</div> -->

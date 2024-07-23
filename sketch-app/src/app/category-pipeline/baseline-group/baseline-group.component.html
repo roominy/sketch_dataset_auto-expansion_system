@@ -1,0 +1,81 @@
+
+<div class="card  margin-10-auto max-width-80">
+    <h2 class="card-header">{{category?.category_label}}: Add Baseline Group</h2>
+    <div class="card-body">
+        <!-- <p>baseline-group works!</p> -->
+        <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Group Name</label>
+                    <input type="text" formControlName="group_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.group_name.errors }" />
+                    <div *ngIf="submitted && f.group_name.errors" class="invalid-feedback">
+                        <div *ngIf="f.group_name.errors.required">Group Name is required</div>
+                    </div>
+                </div>
+                <div class="mb-3 col"></div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Description</label>
+                    <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+                    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                        <div *ngIf="f.description.errors.required">Description is required</div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="mb-3">
+                <button [disabled]="submitting" class="btn btn-primary">
+                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                    Add Group
+                </button>
+                <button  type='button' class="btn btn-secondary margin-5" (click)="resetForm()">Reset Form</button>
+            </div>
+        </form>
+        <div *ngIf="loading" class="text-center m-5">
+            <span class="spinner-border spinner-border-lg align-center"></span>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Baseline Groups</h2>
+            </div>
+            <div class="baseline-group-table">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%;background: white; position: sticky;top: 0;">ID</th>
+                            <th style="width: 20%;background: white; position: sticky;top: 0;">Group Name</th>
+                            <th style="width: 50%;background: white; position: sticky;top: 0;">Description</th>
+                            <th style="width: 10%;background: white; position: sticky;top: 0;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="baselineGroups && baselineGroups.length == 0">
+                            <td colspan="4" class="text-center">No Baseline Groups</td>
+                        </tr>
+                        <tr *ngFor="let group of baselineGroups">
+                            <td>{{group.baseline_group_id}}</td>
+                            <td>{{group.group_name}}</td>
+                            <td>{{group.description}}</td>
+                            <td style="white-space: nowrap">
+                                <!-- <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary me-1">Edit</a> -->
+                                
+                                <button (click)="deleteGroup(group)" class="btn btn-sm btn-danger btn-delete-user" [disabled]="deleting">
+                                    <!-- <span *ngIf="group.isDeleting" class="spinner-border spinner-border-sm"></span> -->
+                                    <span >Delete</span>
+                                    
+                                </button>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!baselineGroups">
+                            <td colspan="4" class="text-center">
+                                <span class="spinner-border spinner-border-lg align-center"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,36 @@
+<!-- <p>sketch-canvas works!</p> -->
+<div class="card  margin-10-auto max-width-80">
+    <h2 class="card-header">Sketch Canvas</h2>
+    <div class="card-body">
+        <div class="row justify-content-center">
+            <div class="mb-3 col">
+                <div class="row">
+                    <div class="form-label canvas-layout canvas-width">Sketch</div>
+                </div>
+                
+                <canvas class="sketch-canvas canvas-layout" id="sketchCanvas" width="300px" height="300px" (mousedown)="startDrawing($event)" (mousemove)="draw($event)" (mouseup)="stopDrawing()" (mouseleave)="stopDrawing()"></canvas>
+                
+            </div>
+            <div class="mb-3 col margin-10 ">
+                <div class="row">
+                    <label class="form-label">Category Label</label>
+                    <input type="text"  class="form-control" [value]="category?.category_label" readonly />
+                </div>
+                <div class="row">
+                    <label class="form-label">Category Description</label>
+                    <input type="text"  class="form-control" [value]="category?.description" readonly />
+                </div>
+                
+            </div>
+
+        </div>
+        
+        
+        <div class="mb-3">
+            <button class="btn btn-primary" (click)="saveCanvas()">Submit Sketch</button>
+            <button class="btn btn-secondary margin-5" (click)="clearCanvas()">Reset Canvas</button>
+            <button  routerLink="/" routerLinkActive="active" type="button" class="btn btn-danger margin-5" >Cancel</button>
+        </div>
+
+    </div>
+</div>

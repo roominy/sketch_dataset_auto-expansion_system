@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Add Category</h2>
+<div mat-dialog-content [formGroup]="form">
+        <mat-form-field>
+            <input matInput
+                    placeholder="Category Name"
+                   formControlName="category_name">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput
+                    placeholder="Category Label"
+                   formControlName="category_label">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput
+                    placeholder="Category Description"
+                   formControlName="description">
+        </mat-form-field>
+          
+    </div>
+<div mat-dialog-actions align="end">
+    <button class="mat-raised-button"(click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+</div>

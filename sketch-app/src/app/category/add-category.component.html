@@ -1,0 +1,44 @@
+<div class="card margin-10-auto max-width-80">
+    <h2 class="card-header">Add Category</h2>
+    <div class="card-body">
+        <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Category Label</label>
+                    <input type="text" formControlName="category_label" class="form-control" (ngModelChange)="setName($event)" [ngClass]="{ 'is-invalid': submitted && f.category_label.errors }" />
+                    <div *ngIf="submitted && f.category_label.errors" class="invalid-feedback">
+                        <div *ngIf="f.category_label.errors.required">Category Label is required</div>
+                    </div>
+                </div>
+                <div class="mb-3 col">
+                    <label class="form-label">Category Name</label>
+                    <input type="text" formControlName="category_name"  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.category_name.errors }" />
+                    <div *ngIf="submitted && f.category_name.errors" class="invalid-feedback">
+                        <div *ngIf="f.category_name.errors.required">Category Name is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Description</label>
+                    <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+                    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                        <div *ngIf="f.description.errors.required">Description is required</div>
+                    </div>
+                </div>
+                <div class="mb-3 col"></div>
+            </div>
+            <div class="mb-3">
+                <button [disabled]="submitting" class="btn btn-primary">
+                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                    Add Category
+                </button>
+                <button  type='button' class="btn btn-secondary margin-5" (click)="resetForm()">Reset Form</button>
+                <button  routerLink="/" routerLinkActive="active" type="button" class="btn btn-danger margin-5" >Cancel</button>
+            </div>
+        </form>
+        <div *ngIf="loading" class="text-center m-5">
+            <span class="spinner-border spinner-border-lg align-center"></span>
+        </div>
+    </div>
+</div>

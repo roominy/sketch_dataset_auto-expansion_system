@@ -1,0 +1,396 @@
+/* You can add global styles to this file, and also import other style files */
+.app-container {
+
+        height: 100%;
+        width: 100%
+    // height: 100%;
+    // // min-height: 100vh;
+    // overflow: hidden;
+}
+
+
+.disabled-category {
+    pointer-events: none; // use this if you want to block all pointer events on element
+    background-color: #787878;
+    color: #aeaeae !important;
+    //display: none; # use this if you want to hide element
+}
+.canvas-layout {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.canvas-width {
+    width: 320px;
+}
+
+.sketch-canvas {
+    border: #fbf3f3;
+    border-style: ridge;
+   
+ 
+
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.btn-delete-user {
+    width: 40px;
+    text-align: center;
+    box-sizing: content-box;
+}
+
+.min-vh-90 {
+    min-height: 90vh!important;
+}
+
+.min-vh-10 {
+    min-height: 10vh!important;
+}
+.min-vh-5 {
+    min-height: 5vh!important;
+}
+.min-vh-8 {
+    min-height: 6vh!important;
+}
+.min-vh-95 {
+    min-height: 95vh!important;
+}
+.min-vh-92 {
+    // min-height: 94vh!important;
+    flex-grow: 1;
+}
+
+.example-fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+
+.viewportDiv {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  mat-toolbar{
+    position:fixed;
+    top:0;
+    z-index: 2;
+}
+
+.mat-list-base {
+     padding-top: 0!important;
+     padding-left: 0!important;
+     padding-right: 0!important;
+     
+}
+
+
+
+mat-list-item-content {
+    padding-left: 0!important;
+    padding-right: 0!important;
+}
+
+mat-sidenav-container {
+    height:100%;
+}
+
+.expanded {
+    width: 250px;   
+}
+
+.collapsed {
+    width: 0px;   
+}
+
+.margin-5 {
+    margin: 5px;
+}
+
+.margin-10 {
+    margin: 10px;
+}
+.max-width-80 {
+    max-width: 80%;
+    min-width: 900px;
+}
+
+.max-width-60 {
+    max-width: 60%;
+    min-width: 500px;
+}
+.margin-10-auto {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.margin-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+   
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.legend { list-style: none; }
+.legend li { 
+    float: left; 
+    margin-right: 10px;
+    line-height: 2em;
+ }
+.legend span { 
+    //border: 1px solid #ccc; 
+    float: left; 
+    width: 30px; 
+    height: 30px; 
+    margin: 2px; 
+}
+
+
+
+.nav-list-title {
+    display: flex;
+    padding: 8px 5px  8px 20px ;
+    background-color: rgb(221, 219, 216);
+    font: 500 20px / 20px Roboto, 'Helvetica Neue', sans-serif;
+   
+}
+
+.nav-list-title > .title {
+    padding-top: 10px;
+    
+}
+
+.baseline-group-table{
+    height: 300px;
+    max-height: 300px;
+    overflow: scroll;
+}
+
+.baseline-table{
+    // width: 60%;
+    height: 400px;
+    max-height: 400px;
+    overflow: scroll;
+}
+
+.result-table{
+    // width: 60%;
+    height: 350px;
+    max-height: 350px;
+    overflow: scroll;
+}
+
+.pipeline-configuration-table {
+    height: 300px;
+    max-height: 300px;
+    overflow: scroll;
+}
+
+.selected-files-area{
+    display: flex;
+    width: 97%;
+    height: 200px;
+    padding: 1%;
+    text-align: center;
+    border: solid 1px #ced4da;
+    position: relative;
+    margin: 0 auto;
+  
+    text-align: center;
+  
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    overflow-x: scroll;
+
+}
+
+.no-files-selected {
+    margin: auto;
+    font-size: 20px;
+    font-weight: 600;
+    color: #7f878e;
+}
+
+.file-item{
+    width: 160px;
+    min-width: 160px;
+    overflow:hidden;
+    height: fit-content;
+    margin:3px;
+    padding: 10px;
+    display:block;
+    position:relative;
+    float:left;
+    border: 2px solid #eeeff1;
+    border-radius:5px;
+    transition: .3s ease;
+    background: #eeeff1;
+  }
+
+  .file-item-remove {
+    position: absolute;
+    top: .3px;
+    right: .3px;
+    img, svg {
+        width: 19px;
+        height: 19px;
+        color:white
+    }
+  }
+
+  .file-item-image{
+    width: 120px;
+    height: 120px;
+    border: solid 1px #eeeff1;
+    border-radius: 5%;
+  }
+    .file-item:hover{
+      border:2px solid #c33838;
+      background-color: #c33838bf;
+    }
+    .file-item:hover .file-item-icon::before{
+      content: "\f00d";
+      color: whitesmoke;
+    }
+    .file-item:hover .file-item-text{
+      color: whitesmoke;
+    }
+  .file-item-icon-div{
+    text-align:center;
+  }
+  .file-item-icon::before{
+    font-style: normal;
+    content: "\f15b";
+    color:#778899;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+  }
+  .file-item-text{
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+    height: 20px;
+    overflow: hidden;
+  }
+
+  
+.drag-drop-area {
+    width: 97%;
+    height: 200px;
+    padding: 2rem;
+    text-align: center;
+    border: dashed 1px #979797;
+    position: relative;
+    margin: 0 auto;
+  
+    text-align: center;
+  
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px;
+
+    label {
+        color: white;
+        width: 150px;
+        height: 40px;
+        font-size: larger;
+        border-radius: 7px;
+        background-color: #117c4b;
+        padding: 10px 16px;
+    }
+    
+    input[type="file"]{
+        display:none;
+    }
+
+    h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #38424c;
+    }
+
+}
+
+.drag-drop-area p {
+    margin: 0;
+  }
+  
+.drag-drop-area:hover {
+    background-color: #f2f2f2;
+}
+
+.uploading {
+    display: flex;
+  
+    align-items: center;
+  
+    justify-content: center;
+  
+    height: 100px;
+  }
+  
+  .uploading::after {
+    content: "";
+  
+    display: inline-block;
+  
+    width: 20px;
+  
+    height: 20px;
+  
+    border: 2px solid #ccc;
+  
+    border-top-color: #333;
+  
+    border-radius: 50%;
+  
+    animation: spin 1s linear infinite;
+  }
+
+  .btn-baseline-sketch {
+    margin: 2px;
+    text-align: center;
+    box-sizing: content-box;
+  }
+
+
+  
+
+// Move the content down so that it won't be hidden by the toolbar
+mat-sidenav {
+    padding-top: 3.5rem;
+    @media screen and (min-width: 600px) {
+      padding-top: 4rem;
+    }
+
+    .entry{
+        display: flex;
+        align-items: center;
+        width: 100%;
+        gap: 1rem;
+        padding:0rem;
+    }
+  }
+
+// Move the content down so that it won't be hidden by the toolbar
+mat-sidenav-content{
+    padding-top: 3.5rem;
+    @media screen and (min-width: 600px) {
+        padding-top: 4rem;
+    }
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

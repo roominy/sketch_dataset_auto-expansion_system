@@ -1,0 +1,106 @@
+
+<div class="card  margin-10-auto max-width-80">
+    <h2 class="card-header">{{category?.category_label}}: View Pipeline Results</h2>
+    <div class="card-body">
+        <!-- <p>baseline-group works!</p> -->
+        <form *ngIf="!loading" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="mb-3 col">
+                    <label class="form-label">Pipeline Configuration</label>
+                    <select id="pipeline_configuration" formControlName="pipeline_configuration" class="form-control">
+                        <option *ngFor="let configuration of pipelineConfigurations" [value]="configuration.configuration_id">
+                            {{configuration.configuration_name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="mb-3 col">
+                    
+                    <button [disabled]="submitting" class="btn btn-primary" style="margin-top: 1.7em">
+                        <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                        Fetch Results
+                    </button>
+                </div>
+            </div>
+            <!-- <div class="mb-3">
+                <button [disabled]="submitting" class="btn btn-primary">
+                    <span *ngIf="submitting" class="spinner-border spinner-border-sm me-1"></span>
+                    Fetch Baselines
+                </button>
+            </div> -->
+        </form>
+        <div *ngIf="loading" class="text-center m-5">
+            <span class="spinner-border spinner-border-lg align-center"></span>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h2>Pipeline Results:</h2>
+            </div>
+            <div class="col">
+                <ul class="legend">
+                    <li><span class="text-center"><i class="material-icons text-center" [ngStyle]="{'color': 'green'}">circle</i> </span> Positive  </li>
+                    <li><span class="text-center"><i class="material-icons text-center" [ngStyle]="{'color': 'red'}">circle</i> </span> Negative </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mb-3">
+                <div class="result-table">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th style="width: 80%;background: white; position: sticky;top: 0;">Sketch Name</th>
+                                <th style="width: 10%;background: white; position: sticky;top: 0;">Result</th>
+                                <!-- <th style="width: 50%">Description</th> -->
+                                <th style="width: 10%;background: white; position: sticky;top: 0;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngIf="pipelineResults && pipelineResults?.length == 0">
+                                <td colspan="4" class="text-center">No Pipeline Results</td>
+                            </tr>
+                            <tr *ngFor="let result of pipelineResults">
+                                <td>{{result.sketch_name}}</td>
+                                <!-- <td>{{result.result}}</td> -->
+                                <td><i class="material-icons text-center" [ngStyle]="{'color': (result?.result == 'positive')? 'green' : 'red' }">circle</i></td>
+                                
+                                <!-- <td>{{group.description}}</td> -->
+                                <td style="white-space: nowrap">
+                                    <!-- <a routerLink="edit/{{user.id}}" class="btn btn-sm btn-primary me-1">Edit</a> -->
+                                    <button (click)="previewSketch(result)" class="btn btn-sm btn-secondary btn-baseline-sketch">
+                                        <!-- <span *ngIf="group.isDeleting" class="spinner-border spinner-border-sm"></span> -->
+                                        <span><i class="fa fa-eye" aria-hidden="true"></i></span>
+                                        
+                                    </button>
+                                    <a  [href]="result?.sketch" [attr.download]="result?.sketch_name" style="color: white;">
+                                    <button class="btn btn-sm btn-primary btn-baseline-sketch" >
+                                        <!-- <span *ngIf="group.isDeleting" class="spinner-border spinner-border-sm"></span> -->
+                                        <!-- <a download="sketch.baseline_name" href="sketch.baseline_sketch" style="color: white;"><span><i class="fa fa-download"></i></span></a> -->
+                                        <span><i class="fa fa-download"></i></span>
+                                        
+                                    </button>
+                                    </a>
+
+                                </td>
+                            </tr>
+                            <tr *ngIf="!pipelineResults">
+                                <td colspan="4" class="text-center">
+                                    <span class="spinner-border spinner-border-lg align-center"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="mb-3 col">
+
+                <div *ngIf="preview" class="container" style="text-align: center;">
+                    <h2>Selected Pipeline Result Sketch:</h2>
+                    <p><span>{{selectedResult?.sketch_name}}</span></p>
+                    <img class="baseline-group-image img-thumbnail" style="margin: auto;display: block;width: 260px;height: 260px;" [src]="selectedResult?.sketch" />
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
