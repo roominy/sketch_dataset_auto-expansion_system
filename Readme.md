@@ -55,7 +55,7 @@ npm start
 - api/user/profile: has the user profile management endpoints
 
 ## CNN-based Encoder
-Download the final Resnet18 model from [here](https://drive.google.com/file/d/18WN_fr2ilfjFrSWh8XTOyCSetOW55xFL/view?usp=sharing).
+Download the final Resnet18 model from [here](https://drive.google.com/file/d/18WN_fr2ilfjFrSWh8XTOyCSetOW55xFL/view?usp=sharing) and place it in flaskBackend/models folder.
 
 
 
