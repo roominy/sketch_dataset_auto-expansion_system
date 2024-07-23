@@ -4,3 +4,4 @@
 /models/final_resnet_model.pth
 /logs/*
 /.venv/*
+.DS_Store
