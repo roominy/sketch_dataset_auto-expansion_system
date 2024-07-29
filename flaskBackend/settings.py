@@ -20,7 +20,7 @@ EMAIL_PASSWORD_FILE = '~/.ssh/email_password'
 EMAIL_PASSWORD_FILE_PATH = os.path.expanduser(EMAIL_PASSWORD_FILE)
 MAIL_SERVER = 'smtp.gmail.com'
 MAIL_PORT = 465
-MAIL_USERNAME = 'email'
+MAIL_USERNAME = 'sketch.dataset.auto.expansion@gmail.com'
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
 
