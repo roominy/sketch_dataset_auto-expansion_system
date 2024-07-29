@@ -122,6 +122,7 @@ export class AddEditComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.alertService.clear();
         this.actionsSubscription?.unsubscribe(); 
     }
 

@@ -91,7 +91,8 @@ export class AppEffects {
                     map(() => fetchCategories()),
                     tap(() => {
                         // this.router.navigate(['/']);
-                        this.alertService.success('Category status changed successfully', { keepAfterRouteChange: true });
+                        // this.alertService.success('Category status changed successfully', { keepAfterRouteChange: true });
+                        this.alertService.success('Category status changed successfully');
                         
                     }),
                     catchError(error => { 
@@ -112,7 +113,8 @@ export class AppEffects {
                 this.sketchService.submitSketch(sketch).pipe(
                     map(() => submitSketchSuccess()),
                     tap(() => {
-                        this.alertService.success('Sketch submitted successfully.',{ keepAfterRouteChange: true });
+                        // this.alertService.success('Sketch submitted successfully.',{ keepAfterRouteChange: true });
+                        this.alertService.success('Sketch submitted successfully.');
                     }),
                     catchError(error => { 
                         this.alertService.error(error); 
@@ -148,7 +150,8 @@ export class AppEffects {
                     // map(() => fetchBaselineGroups({ category: baselineGroup.category }) ),
                     map(() => fetchBaselineGroups({ categoryId: baselineGroup?.category_id}) ),
                     tap(() => {
-                        this.alertService.success('Baseline Group added successfully.',{ keepAfterRouteChange: true });
+                        // this.alertService.success('Baseline Group added successfully.',{ keepAfterRouteChange: true });
+                        this.alertService.success('Baseline Group added successfully.');
                     }),
                     catchError(error => { 
                         this.alertService.error(error); 
@@ -166,7 +169,8 @@ export class AppEffects {
                 this.baselinesService.deleteBaselineGroup(groupId).pipe(
                     map(() => fetchBaselineGroups({ categoryId: categoryId })),
                     tap(() => {
-                        this.alertService.success('Baseline Group deleted successfully.',{ keepAfterRouteChange: true });
+                        // this.alertService.success('Baseline Group deleted successfully.',{ keepAfterRouteChange: true });
+                        this.alertService.success('Baseline Group deleted successfully.');
                     }),
                     catchError(error => { 
                         this.alertService.error(error); 
@@ -186,7 +190,8 @@ export class AppEffects {
                 this.baselinesService.addBaselineGroupSketches(BaselineGroupSketches).pipe(
                     map(() => addBaselineGroupSketchesSuccess()),
                     tap(() => {
-                        this.alertService.success('Sketches added to Baseline Group successfully.',{ keepAfterRouteChange: true });
+                        // this.alertService.success('Sketches added to Baseline Group successfully.',{ keepAfterRouteChange: true });
+                        this.alertService.success('Sketches added to Baseline Group successfully.');
                     }),
                     catchError(error => { 
                         this.alertService.error(error); 
@@ -219,7 +224,8 @@ export class AppEffects {
                 this.baselinesService.deleteBaselineGroupSketch(baselineId).pipe(
                     map(() => fetchBaselineGroupSketches({ groupId: groupId })),
                     tap(() => {
-                        this.alertService.success('Sketch deleted successfully.',{ keepAfterRouteChange: true });
+                        // this.alertService.success('Sketch deleted successfully.',{ keepAfterRouteChange: true });
+                        this.alertService.success('Sketch deleted successfully.');
                     }),
                     catchError(error => { 
                         this.alertService.error(error); 
@@ -254,7 +260,8 @@ export class AppEffects {
                 this.baselinesService.addPipelineConfiguration(pipelineConfiguration).pipe(
                     map(() => fetchPipelineConfigurations({categoryId: pipelineConfiguration.category_id}) ),
                     tap(() => {
-                        this.alertService.success('Pipeline Configuration added successfully.',{ keepAfterRouteChange: true });
+                        // this.alertService.success('Pipeline Configuration added successfully.',{ keepAfterRouteChange: true });
+                        this.alertService.success('Pipeline Configuration added successfully.');
                     }),
                     catchError(error => { 
                         this.alertService.error(error); 
@@ -272,7 +279,8 @@ export class AppEffects {
                 this.baselinesService.changePipelineConfigurationStatus(categoryId, configurationId).pipe(
                     map(() => fetchPipelineConfigurations({categoryId: categoryId})),
                     tap(() => {
-                        this.alertService.success('Pipeline Configuration status changed successfully', { keepAfterRouteChange: true });
+                        // this.alertService.success('Pipeline Configuration status changed successfully', { keepAfterRouteChange: true });
+                        this.alertService.success('Pipeline Configuration status changed successfully');
                         
                     }),
                     catchError(error => { 

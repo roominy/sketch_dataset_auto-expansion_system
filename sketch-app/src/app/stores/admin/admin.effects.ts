@@ -37,7 +37,8 @@ export class AdminEffects {
                 this.userAdminService.addUser(user).pipe(
                     map(() => fetchUsers()),
                     tap(() => {
-                        this.alertService.success('User created successfully.',{ keepAfterRouteChange: true });
+                        // this.alertService.success('User created successfully.',{ keepAfterRouteChange: true });
+                        this.alertService.success('User created successfully.');
 
                     }),
                     catchError(error => { 
@@ -56,7 +57,8 @@ export class AdminEffects {
                 this.userAdminService.editUser(user).pipe(
                     map(() => fetchUsers()),
                     tap(() => {
-                        this.alertService.success('User updated successfully.',{ keepAfterRouteChange: true });
+                        // this.alertService.success('User updated successfully.',{ keepAfterRouteChange: true });
+                        this.alertService.success('User updated successfully.');
                     }),
                     catchError(error => { 
                         this.alertService.error(error); 
@@ -75,10 +77,13 @@ export class AdminEffects {
                     map(() => fetchUsers()),
                     tap(() => {
                         if(user.status === 'active'){
-                            this.alertService.success('User deactivated successfully.',{ keepAfterRouteChange: true });
+                            // this.alertService.success('User deactivated successfully.',{ keepAfterRouteChange: true });
+                            this.alertService.success('User deactivated successfully.');
                         }
                         else{
-                            this.alertService.success('User activated successfully.',{ keepAfterRouteChange: true });
+                            // this.alertService.success('User activated successfully.',{ keepAfterRouteChange: true });
+                            this.alertService.success('User activated successfully.');
+                            
                         }
                     }),
                     catchError(error => { 
@@ -97,7 +102,8 @@ export class AdminEffects {
                 this.userAdminService.resetPassword(user).pipe(
                     map(() => fetchUsers()),
                     tap(() => {
-                        this.alertService.success('User password reset successfully.',{ keepAfterRouteChange: true });
+                        // this.alertService.success('User password reset successfully.',{ keepAfterRouteChange: true });
+                        this.alertService.success('User password reset successfully.');
                     }),
                     catchError(error => { 
                         this.alertService.error(error); 

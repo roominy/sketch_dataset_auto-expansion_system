@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { AuthStoreModule } from '@app/stores/auth/auth-store.module';
 import { deactivateAccount, updateProfile, fetchProfile} from '@app/stores/auth/auth.actions';
 import { isDeactivateLoading, isUpdateLoading, selectUser } from '@app/stores/auth/auth.selectors';
-import { HelperService } from '@app/_services';
+import { AlertService, HelperService } from '@app/_services';
 import * as AuthActions  from '@app/stores/auth/auth.actions';
 
 import { Actions, ofType } from '@ngrx/effects';
@@ -47,7 +47,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private router: Router,
         private helperService: HelperService,
-        private actions$: Actions
+        private actions$: Actions,
+        private alertService: AlertService,
         // private accountService: AccountService,  
         // private authActions: authActions  
       
@@ -135,6 +136,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       }
 
       ngOnDestroy() {
+        this.alertService.clear();  
         if (this.actionsSubscription) {
         this.actionsSubscription.unsubscribe();
         }
@@ -144,6 +146,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
       get f() { return this.form.controls; }
 
       onSubmit() { 
+        this.alertService.clear()
 
         ;
         this.submitted = true;
@@ -187,7 +190,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
       deactivateAccount() {
 
-        
+        this.alertService.clear();
 
         this.submitted = true;
 

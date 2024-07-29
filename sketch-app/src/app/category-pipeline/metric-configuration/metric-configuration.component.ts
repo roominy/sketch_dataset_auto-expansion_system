@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BaselineGroup, Category, PipelineConfiguration } from '@app/_models';
 import { AlertService } from '@app/_services';
@@ -14,7 +14,7 @@ import { Actions, ofType } from '@ngrx/effects';
   templateUrl: './metric-configuration.component.html',
   styleUrls: ['./metric-configuration.component.less']
 })
-export class MetricConfigurationComponent implements OnInit {
+export class MetricConfigurationComponent implements OnInit, OnDestroy {
 
   form!: FormGroup;
   baselineGroups: BaselineGroup[]  = []; 
@@ -74,7 +74,7 @@ export class MetricConfigurationComponent implements OnInit {
       // The logic here will execute for any of the actions defined above
       if (action.type === '[App] Add Pipeline Configuration Success' || action.type === '[App] Fetch Pipeline Configurations Success') {
         
-        this.alertService.clear();
+        // this.alertService.clear();
         this.submitting = false;
         this.resetForm();
       } else if (action.type === '[App] Change Pipeline Configuration Status Success' || action.type === '[App] Change Pipeline Configuration Status Failure'){
@@ -120,7 +120,7 @@ export class MetricConfigurationComponent implements OnInit {
   resetForm() {
     
     this.configurationName = new String('');
-    this.alertService.clear();
+    // this.alertService.clear();
     this.submitted = false;
     this.form.reset();
     this.baselineGroup = 'baselineGroup'.toString();
@@ -157,6 +157,7 @@ export class MetricConfigurationComponent implements OnInit {
   }
 
   changingConfigurationStatus(configuration: any){
+    this.alertService.clear();
     this.changingStatus = true;
     this.appStore.dispatch(AppActions.changePipelineConfigurationStatus({ configurationId: configuration.configuration_id , categoryId: this.category?.category_id}));
   }

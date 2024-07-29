@@ -65,7 +65,7 @@ export class BaselineViewComponent implements OnInit, OnDestroy {
         // The logic here will execute for any of the actions defined above
         if (action.type === '[App] Fetch Baseline Group Sketches Success') {
           
-          this.alertService.clear();
+          // this.alertService.clear();
           this.submitting = false;
           this.deleting = false;
         } else {
@@ -91,7 +91,7 @@ export class BaselineViewComponent implements OnInit, OnDestroy {
 
     if (this.seletGroupForm.invalid) {
       this.submitting = false;
-      this.alertService.error('Please select a basline group.',{ keepAfterRouteChange: true });
+      this.alertService.error('Please select a basline group.');
       return;
     }
 

@@ -20,14 +20,14 @@ EMAIL_PASSWORD_FILE = '~/.ssh/email_password'
 EMAIL_PASSWORD_FILE_PATH = os.path.expanduser(EMAIL_PASSWORD_FILE)
 MAIL_SERVER = 'smtp.gmail.com'
 MAIL_PORT = 465
-MAIL_USERNAME = 'email@email'
+MAIL_USERNAME = 'sketch.dataset.auto.expansion@gmail.com'
 MAIL_USE_TLS = False
 MAIL_USE_SSL = True
 
 # MySQL settings
 MYSQL_DATABASE_PASSWORD_FILE = '~/.ssh/mysql_password'
 MYSQL_DATABASE_PASSWORD_FILE_PATH = os.path.expanduser(MYSQL_DATABASE_PASSWORD_FILE)
-MYSQL_DATABASE_HOST = 'IP.IP.IP.IP'
+MYSQL_DATABASE_HOST = '172.234.228.88'
 MYSQL_DATABASE_DB = 'SKETCHDB'
 MYSQL_DATABASE_USER = 'sketch_user'
 

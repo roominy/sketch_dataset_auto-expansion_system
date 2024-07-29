@@ -51,7 +51,7 @@ export class PipelineOverviewComponent implements OnInit {
       // The logic here will execute for any of the actions defined above
       if (action.type === '[App] Fetch Pipeline Results Success') {
         
-        this.alertService.clear();
+        // this.alertService.clear();
         this.submitting = false;
       } else {
         this.submitting = false;
@@ -69,7 +69,8 @@ export class PipelineOverviewComponent implements OnInit {
     this.submitted = true;
     if (this.form.invalid) {
       this.submitting = false;
-      this.alertService.error('Please select a pipeline.',{ keepAfterRouteChange: true });
+      // this.alertService.error('Please select a pipeline.',{ keepAfterRouteChange: true });
+      this.alertService.error('Please select a pipeline.');
       return;
     }
     let configurationId = this.form.value.pipeline_configuration;
@@ -84,9 +85,9 @@ export class PipelineOverviewComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
+    this.alertService.clear();  
     this.actionsSubscription?.unsubscribe();
     this.appStore.dispatch(AppActions.emptyPipelineResultsState());
-
   }
 
 

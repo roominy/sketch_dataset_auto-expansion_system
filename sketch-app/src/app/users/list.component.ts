@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit , OnDestroy} from '@angular/core';
 import { first } from 'rxjs/operators';
 
-import { AccountService, UserAdminService } from '@app/_services';
+import { AccountService, AlertService, UserAdminService } from '@app/_services';
 import { Store } from '@ngrx/store';
 import { AdminStoreModule } from '@app/stores/admin/admin-store.module';
 import { MatIconModule } from '@angular/material/icon';
@@ -22,6 +22,7 @@ export class ListComponent implements OnInit, OnDestroy {
 
     constructor(private accountService: AccountService, 
         private store : Store<AdminStoreModule>,
+        private alertService: AlertService,
         private actions$: Actions) {}
     
 
@@ -57,12 +58,14 @@ export class ListComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.actionsSubscription?.unsubscribe();
+      this.alertService.clear();
+      this.actionsSubscription?.unsubscribe();
     }
 
     changeUserStatus(user: User) {
-        this.submittingChangeUserStatus = true;
-        this.store.dispatch(AdminActions.changeUserStatus({user: user}));
+      this.alertService.clear();
+      this.submittingChangeUserStatus = true;
+      this.store.dispatch(AdminActions.changeUserStatus({user: user}));
     }
 
     deleteUser(id: string) {

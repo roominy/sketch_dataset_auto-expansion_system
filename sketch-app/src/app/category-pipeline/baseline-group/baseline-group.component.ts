@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService } from '@app/_services';
 import { BaselineGroup, Category } from '@app/_models';
@@ -15,7 +15,7 @@ import { AppStoreModule } from '@app/stores/app/app-store.module';
   templateUrl: './baseline-group.component.html',
   styleUrls: ['./baseline-group.component.less']
 })
-export class BaselineGroupComponent implements OnInit {
+export class BaselineGroupComponent implements OnInit, OnDestroy {
 
   form!: FormGroup;
   id?: string;
@@ -65,11 +65,13 @@ export class BaselineGroupComponent implements OnInit {
       // Handle the success actions here
       // The logic here will execute for any of the actions defined above
       if (action.type === '[App] Fetch Baseline Groups Success' || action.type === '[App] Add Baseline Group Success') {
+        this.appStore.dispatch(fetchPipelineConfigurations({categoryId: this.category?.category_id}));
         
         this.deleting = false;
         this.submitting = false;
         this.resetForm();
       } else {
+        
         this.deleting = false;
         this.submitting = false;
       }
@@ -79,7 +81,7 @@ export class BaselineGroupComponent implements OnInit {
   }
 
   resetForm() {
-    this.alertService.clear();
+    // this.alertService.clear();
     this.submitted = false;
     this.form.reset();
 
@@ -100,11 +102,10 @@ export class BaselineGroupComponent implements OnInit {
 
 
   onSubmit() {
+    this.alertService.clear();
     this.submitted = true;
 
     // reset alerts on submit
-    this.alertService.clear();
-
     // stop here if form is invalid
     if (this.form.invalid) {
         return;
@@ -119,9 +120,9 @@ export class BaselineGroupComponent implements OnInit {
     
   }
 
-  onNGDestroy(): void {
-    this.alertService.clear();
-    
+
+  ngOnDestroy(): void {
+    this.alertService.clear();  
   }
 
 }

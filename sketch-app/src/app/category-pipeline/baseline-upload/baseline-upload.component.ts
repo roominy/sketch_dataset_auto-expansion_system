@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, OnDestroy } from '@angular/core';
 import { ImageFile, BaselineGroup, BaselineGroupSketches } from '@app/_models';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Category, BaselineSketch } from '@app/_models';
@@ -15,7 +15,7 @@ import { Actions, ofType } from '@ngrx/effects';
   templateUrl: './baseline-upload.component.html',
   styleUrls: ['./baseline-upload.component.less']
 })
-export class BaselineUploadComponent implements OnInit {
+export class BaselineUploadComponent implements OnInit, OnDestroy {
 
   // // @ViewChild("fileDropRef", { static: false }) fileDropEl: ElementRef | undefined;
   // files: ImageFile[] = [];
@@ -88,7 +88,7 @@ export class BaselineUploadComponent implements OnInit {
   // }
 
   onSubmit(): void {
-    // this.alertService.clear();
+    this.alertService.clear();
     
     if (this.uploadForm.valid && this.baselineGroupSketches.length) {
       this.submitting = true;
@@ -108,14 +108,17 @@ export class BaselineUploadComponent implements OnInit {
     } else  {
       this.submitting = false;
       if(this.baselineGroupSketches.length == 0 && this.uploadForm.valid == false){
-        this.alertService.error('Please select files and choose a basel.',{ keepAfterRouteChange: true });
+        // this.alertService.error('Please select files and choose a basel.',{ keepAfterRouteChange: true });
+        this.alertService.error('Please select files and choose a basel.');
         return;
 
       } else if(this.baselineGroupSketches.length == 0){
-        this.alertService.error('Please select files.',{ keepAfterRouteChange: true });
+        // this.alertService.error('Please select files.',{ keepAfterRouteChange: true });
+        this.alertService.error('Please select files.');
         return;
       } else if(this.uploadForm.valid == false){
-        this.alertService.error('Please choose a category.',{ keepAfterRouteChange: true });
+        // this.alertService.error('Please choose a category.',{ keepAfterRouteChange: true });
+        this.alertService.error('Please choose a category.');
         return;
       }
       
@@ -125,7 +128,7 @@ export class BaselineUploadComponent implements OnInit {
   }
 
   resetForm() {
-    this.alertService.clear();
+    // this.alertService.clear();
     this.submitting = false;
     this.submitted = false;
     this.uploadForm.reset();
@@ -216,7 +219,7 @@ export class BaselineUploadComponent implements OnInit {
     event.preventDefault();
   }
 
-  onNGDestroy(): void {
+  ngOnDestroy(): void {
     this.alertService.clear();
     
   }
